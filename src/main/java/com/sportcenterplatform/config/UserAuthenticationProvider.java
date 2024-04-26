@@ -1,10 +1,10 @@
-package com.velikanovdev.sportcenterplatform.config;
+package com.sportcenterplatform.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.velikanovdev.sportcenterplatform.dto.UserDTO;
+import com.sportcenterplatform.dto.UserDTO;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +59,7 @@ public class UserAuthenticationProvider {
                 .withExpiresAt(new Date(now.getTime() + TOKEN_VALIDITY))
                 .withClaim("email", user.email())
                 .withClaim("username", user.username())
-                .withClaim("role", user.role().getName())
+                .withClaim("role", user.role().name())
                 .sign(algorithm);
     }
 

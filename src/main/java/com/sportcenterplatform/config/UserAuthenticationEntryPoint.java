@@ -1,4 +1,4 @@
-package com.velikanovdev.sportcenterplatform.config;
+package com.sportcenterplatform.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,5 +27,6 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        // this may be the place where it always sends 401
     }
 }

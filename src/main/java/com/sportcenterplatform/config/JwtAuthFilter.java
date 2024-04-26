@@ -1,4 +1,4 @@
-package com.velikanovdev.sportcenterplatform.config;
+package com.sportcenterplatform.config;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import jakarta.servlet.FilterChain;

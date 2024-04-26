@@ -1,6 +1,6 @@
-package com.velikanovdev.sportcenterplatform.config.security;
+package com.sportcenterplatform.config.security;
 
-import com.velikanovdev.sportcenterplatform.repository.UserRepository;
+import com.sportcenterplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
