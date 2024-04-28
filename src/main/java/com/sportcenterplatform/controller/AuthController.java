@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserService userService;
     private final UserAuthenticationProvider userAuthenticationProvider;
+    private final TokenStorage tokenStorage;
 
     @Autowired
-    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider) {
+    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider, TokenStorage tokenStorage) {
         this.userService = userService;
         this.userAuthenticationProvider = userAuthenticationProvider;
+        this.tokenStorage = tokenStorage;
     }
 
     /**
@@ -36,7 +38,7 @@ public class AuthController {
                 user.getEmail(),
                 user.getPassword());
         String token = userAuthenticationProvider.createToken(authenticatedUser);
-        LoginResponse response = new LoginResponse(token); //loginService.token
+        tokenStorage.setToken(token);
         return "home";
     }
     @GetMapping("/login")
