@@ -9,5 +9,14 @@
 </head>
 <body>
     <h1>Home</h1>
+    <tr th:each="event: ${events}">
+        <div>
+        <td th:text="${event.id}" />
+        <td th:text="${event.sportType}" />
+        <td th:text="${event.description}" />
+        <td th:text="'Trainer: '+ ${event.trainerName}" />
+        <td th:text="'email: '+ ${event.trainerEmail}" />
+        </div>
+    </tr>
 </body>
 </html>
