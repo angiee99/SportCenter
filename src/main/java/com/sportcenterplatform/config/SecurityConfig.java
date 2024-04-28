@@ -44,8 +44,7 @@ public class SecurityConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/login","/event/all", "/event/{id}","event/activeEvents", "/event/{id}",
-                                "/schedule/all", "/sportClub/all").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/login","/events").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated());
         return http.build();

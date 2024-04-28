@@ -39,7 +39,7 @@ public class AuthController {
                 user.getPassword());
         String token = userAuthenticationProvider.createToken(authenticatedUser);
         tokenStorage.setToken(token);
-        return "home";
+        return "redirect:/events";
     }
     @GetMapping("/login")
     public String login(Model model) {
