@@ -26,7 +26,6 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-        // this may be the place where it always sends 401
+        response.sendError( response.getStatus(), "Error");
     }
 }
