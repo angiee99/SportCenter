@@ -1,20 +1,20 @@
 package com.sportcenterplatform.controller;
 
 import com.sportcenterplatform.config.UserAuthenticationProvider;
-import com.sportcenterplatform.dto.LoginRequest;
-import com.sportcenterplatform.dto.LoginResponse;
-import com.sportcenterplatform.dto.UserDTO;
-import com.sportcenterplatform.dto.UserRegisterDTO;
+import com.sportcenterplatform.dto.*;
 import com.sportcenterplatform.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller class for handling authentication-related endpoints.
  */
-@RestController
+@Controller
+@RequestMapping("/")
 public class AuthController {
     private final UserService userService;
     private final UserAuthenticationProvider userAuthenticationProvider;
@@ -28,15 +28,21 @@ public class AuthController {
     /**
      * Endpoint for user login.
      *
-     * @param loginRequest the LoginRequest object containing login credentials
      * @return a ResponseEntity containing the JWT token in a LoginResponse object
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        UserDTO authenticatedUser = userService.login(loginRequest.email(), loginRequest.password());
+    public String login(@ModelAttribute UserLoginModel user, Model model) {
+        UserDTO authenticatedUser = userService.login(
+                user.getEmail(),
+                user.getPassword());
         String token = userAuthenticationProvider.createToken(authenticatedUser);
-        LoginResponse response = new LoginResponse(token);
-        return ResponseEntity.ok(response);
+        LoginResponse response = new LoginResponse(token); //loginService.token
+        return "home";
+    }
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new UserLoginModel());
+        return "login";
     }
 
     /**
