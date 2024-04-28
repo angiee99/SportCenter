@@ -33,6 +33,9 @@ public class Schedule {
     @Column(name = "signed_up_count")
     private Integer signedUpCount;
 
+    @Column(name = "capacity")
+    private Integer capacity;
+
     @OneToMany(mappedBy = "schedule")
     @ToString.Exclude
     private List<EventSignup> eventSignups;
@@ -42,10 +45,11 @@ public class Schedule {
     @ToString.Exclude
     private SportsEvent sportsEvent;
 
-    public Schedule(LocalDateTime startTime, LocalDateTime endTime, SportsEvent sportsEvent) {
+    public Schedule(LocalDateTime startTime, LocalDateTime endTime, SportsEvent sportsEvent, Integer capacity) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.sportsEvent = sportsEvent;
+        this.capacity = capacity;
         signedUpCount = 0;
     }
 

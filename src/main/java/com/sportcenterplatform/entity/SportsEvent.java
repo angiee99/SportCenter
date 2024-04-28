@@ -26,8 +26,9 @@ public class SportsEvent {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "capacity")
-    private Integer capacity;
+    @Column(name = "sportType")
+    @Enumerated(EnumType.STRING)
+    private SportType sportType;
 
     @Column(name = "isAvailable")
     private Boolean isAvailable;
@@ -39,11 +40,11 @@ public class SportsEvent {
     @JoinColumn(name = "trainer_id", foreignKey = @ForeignKey(name = "FK_sports_events_trainers"))
     private User trainer;
 
-    public SportsEvent(String description, Boolean isAvailable, Integer capacity, User trainer) {
+    public SportsEvent(String description, Boolean isAvailable, User trainer, SportType sportType) {
         this.description = description;
         this.isAvailable = isAvailable;
-        this.capacity = capacity;
         this.trainer = trainer;
+        this.sportType = sportType;
     }
 
 }
