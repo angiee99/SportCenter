@@ -1,7 +1,10 @@
 package com.sportcenterplatform.initDB;
 
 import com.sportcenterplatform.entity.Role;
+import com.sportcenterplatform.entity.SportType;
+import com.sportcenterplatform.entity.SportsEvent;
 import com.sportcenterplatform.entity.User;
+import com.sportcenterplatform.repository.SportsEventRepository;
 import com.sportcenterplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +24,7 @@ import java.util.List;
 public class DemoData implements ApplicationRunner {
 
     private final UserRepository userRepository;
+    private final SportsEventRepository sportsEventRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -29,8 +33,9 @@ public class DemoData implements ApplicationRunner {
     private boolean enabled;
 
     @Autowired
-    public DemoData( UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DemoData(UserRepository userRepository, SportsEventRepository sportsEventRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.sportsEventRepository = sportsEventRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -45,7 +50,6 @@ public class DemoData implements ApplicationRunner {
         // Check if demo data initialization is enabled
         if(!enabled) return;
         // Initialize demo data
-
         User user1 = new User( "jakethedog@gmail.com","Jake", Role.ADMIN,
                 passwordEncoder.encode("iloveladyrainicorn"));
         User user2 = new User( "finnthehuman@gmail.com","Finn", Role.ADMIN,
@@ -71,9 +75,16 @@ public class DemoData implements ApplicationRunner {
         User user12 = new User( "randommail@gmail.com", "Josh", Role.USER,
                 passwordEncoder.encode("interesting01Pass10"));
 
-
         userRepository.saveAll(List.of(user1, user2 ,user3, user4, user5, user6, user7,
                 user8, user9, user10, user11, user12));
 
+        SportsEvent event1 = new SportsEvent("Tennis play for kids", true, user2, SportType.TENNIS);
+        SportsEvent event2 = new SportsEvent("Tennis play for adults", true, user1, SportType.TENNIS);
+        SportsEvent event3 = new SportsEvent("Evening yoga", true, user5, SportType.YOGA);
+        SportsEvent event4 = new SportsEvent("Guided TRX full body training", true, user4, SportType.TRX);
+        SportsEvent event5 = new SportsEvent("TRX upper body strength", true, user5, SportType.TRX);
+
+        sportsEventRepository.saveAll(List.of(event1, event2, event3, event4, event5));
     }
+
 }
