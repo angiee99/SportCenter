@@ -30,7 +30,7 @@ public class AuthController {
     /**
      * Endpoint for user login.
      *
-     * @return a ResponseEntity containing the JWT token in a LoginResponse object
+     * @return redirects to /events
      */
     @PostMapping("/login")
     public String login(@ModelAttribute UserLoginModel user, Model model) {
@@ -47,15 +47,22 @@ public class AuthController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("user", new UserRegisterDTO(
+                "test@gmail.com", "username", "password"));
+        return "register";
+    }
+
     /**
      * Endpoint for user registration.
      *
      * @param userRegisterDTO the UserRegisterDTO object containing user registration data
-     * @return a ResponseEntity containing a message confirming the registration
+     * @return login view
      */
     @PostMapping("/register")
-    public ResponseEntity<String> register(@Valid @RequestBody UserRegisterDTO userRegisterDTO) {
-        Long id = userService.register(userRegisterDTO);
-        return ResponseEntity.ok("User with id " + id + " successfully registered");
+    public String register(@Valid @ModelAttribute UserRegisterDTO userRegisterDTO) {
+        userService.register(userRegisterDTO);
+        return "redirect:/login";
     }
 }
