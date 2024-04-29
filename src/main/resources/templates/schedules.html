@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Schedules</h1>
+<th:block>
 <tr>
     <h2>Selected event</h2>
     <th:block>
@@ -15,15 +16,16 @@
         <td th:text="'email: '+ ${event.trainerEmail}" />
     </th:block>
 </tr>
+</th:block>
 
 <th:block th:each="schedule: ${schedules}">
     <tr>
-        <th:block>
+        <div>
             <td th:text="${schedule.startTime}" />
             <td th:text="${schedule.endTime}" />
             <td th:text="${schedule.signedUpCount}" />
             <td th:text="' / '+${schedule.capacity}" />
-        </th:block>
+        </div>
 
 <!--        <form action="#" th:action="@{/signup}" method="post">-->
 <!--            <input type="hidden" th:value="${schedule.id}" th:name="id"/>-->

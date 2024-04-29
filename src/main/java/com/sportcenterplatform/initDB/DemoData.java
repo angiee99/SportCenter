@@ -1,9 +1,7 @@
 package com.sportcenterplatform.initDB;
 
-import com.sportcenterplatform.entity.Role;
-import com.sportcenterplatform.entity.SportType;
-import com.sportcenterplatform.entity.SportsEvent;
-import com.sportcenterplatform.entity.User;
+import com.sportcenterplatform.entity.*;
+import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.repository.SportsEventRepository;
 import com.sportcenterplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,6 +24,7 @@ public class DemoData implements ApplicationRunner {
 
     private final UserRepository userRepository;
     private final SportsEventRepository sportsEventRepository;
+    private final ScheduleRepository scheduleRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -33,9 +33,10 @@ public class DemoData implements ApplicationRunner {
     private boolean enabled;
 
     @Autowired
-    public DemoData(UserRepository userRepository, SportsEventRepository sportsEventRepository, PasswordEncoder passwordEncoder) {
+    public DemoData(UserRepository userRepository, SportsEventRepository sportsEventRepository, ScheduleRepository scheduleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.sportsEventRepository = sportsEventRepository;
+        this.scheduleRepository = scheduleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -85,6 +86,36 @@ public class DemoData implements ApplicationRunner {
         SportsEvent event5 = new SportsEvent("TRX upper body strength", true, user5, SportType.TRX);
 
         sportsEventRepository.saveAll(List.of(event1, event2, event3, event4, event5));
+
+
+        Schedule schedule1 = new Schedule( LocalDateTime.of(2024, 4, 12, 13, 0),
+                LocalDateTime.of(2024, 4, 12, 15, 0),
+                event1, 30);
+        Schedule schedule2 = new Schedule( LocalDateTime.of(2024, 5, 12, 16, 0),
+                LocalDateTime.of(2024, 5, 15, 18, 0),
+                event1, 14);
+        Schedule schedule3 = new Schedule( LocalDateTime.of(2024, 5, 5, 16, 30),
+                LocalDateTime.of(2024, 5, 5, 18, 0),
+                event2, 14);
+        Schedule schedule4 = new Schedule( LocalDateTime.of(2024, 5, 14, 16, 30),
+                LocalDateTime.of(2024, 5, 14, 18, 0),
+                event2, 18);
+        Schedule schedule5 = new Schedule( LocalDateTime.of(2024, 5, 1, 18, 30),
+                LocalDateTime.of(2024, 5, 1, 18, 45),
+                event3, 10);
+        Schedule schedule6 = new Schedule( LocalDateTime.of(2024, 5, 3, 17, 0),
+                LocalDateTime.of(2024, 5, 3, 19, 15),
+                event3, 16);
+        Schedule schedule7 = new Schedule( LocalDateTime.of(2024, 5, 2, 9, 0),
+                LocalDateTime.of(2024, 5, 2, 10, 30),
+                event4, 8);
+        Schedule schedule8 = new Schedule( LocalDateTime.of(2024, 5, 24, 16, 30),
+                LocalDateTime.of(2024, 5, 14, 18, 0),
+                event2, 18);
+
+        scheduleRepository.saveAll(List.of(schedule1, schedule2, schedule3, schedule4,
+                schedule5, schedule6, schedule7, schedule8));
+
     }
 
 }

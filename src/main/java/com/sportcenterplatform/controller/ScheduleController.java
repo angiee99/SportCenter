@@ -24,7 +24,7 @@ public class ScheduleController {
     public String showAllBySportsEventId(@RequestParam(value = "id") Long id, Model model){
         System.out.println(id);
         model.addAttribute("event", sportsEventService.getSportsEventById(id));
-        model.addAttribute("schedule", scheduleService.getAllBySportsEventId(id));
+        model.addAttribute("schedules", scheduleService.getAllBySportsEventId(id));
         return "schedules";
     }
 }
