@@ -1,5 +1,6 @@
 package com.sportcenterplatform.controller;
 
+import com.sportcenterplatform.service.ScheduleService;
 import com.sportcenterplatform.service.SportsEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/schedules")
 public class ScheduleController {
     private final SportsEventService sportsEventService;
+    private final ScheduleService scheduleService;
     @Autowired
-    public ScheduleController(SportsEventService sportsEventService) {
+    public ScheduleController(SportsEventService sportsEventService, ScheduleService scheduleService) {
         this.sportsEventService = sportsEventService;
+        this.scheduleService = scheduleService;
     }
 
     @GetMapping()
     public String showAllBySportsEventId(@RequestParam(value = "id") Long id, Model model){
         System.out.println(id);
         model.addAttribute("event", sportsEventService.getSportsEventById(id));
-
+        model.addAttribute("schedule", scheduleService.getAllBySportsEventId(id));
         return "schedules";
     }
 }

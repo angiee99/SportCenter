@@ -19,8 +19,8 @@
 <th:block th:each="schedule: ${schedules}">
     <tr>
         <th:block>
-            <td th:text="${schedule.timeStart}" />
-            <td th:text="${schedule.timeEnd}" />
+            <td th:text="${schedule.startTime}" />
+            <td th:text="${schedule.endTime}" />
             <td th:text="${schedule.signedUpCount}" />
             <td th:text="' / '+${schedule.capacity}" />
         </th:block>
