@@ -1,6 +1,5 @@
 package com.sportcenterplatform.controller;
 
-import com.sportcenterplatform.entity.Schedule;
 import com.sportcenterplatform.service.SportsEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/schedules")
-public class SchedulesController {
+public class ScheduleController {
     private final SportsEventService sportsEventService;
     @Autowired
-    public SchedulesController(SportsEventService sportsEventService) {
+    public ScheduleController(SportsEventService sportsEventService) {
         this.sportsEventService = sportsEventService;
     }
 
