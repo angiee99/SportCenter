@@ -25,6 +25,13 @@ public class SportsEventServiceImpl implements SportsEventService {
         return events;
     }
 
+    @Override
+    public SportsEventInfoDTO getSportsEventById(Long id) {
+        SportsEvent sportsEvent = sportsEventRepository.findById(id).orElse(null);
+        assert sportsEvent != null;
+        return convertToDTO(sportsEvent);
+    }
+
     private SportsEventInfoDTO convertToDTO(SportsEvent event){
         return new SportsEventInfoDTO(
                 event.getId(),
