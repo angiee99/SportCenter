@@ -18,7 +18,7 @@
 </tr>
 </th:block>
 
-<th:block th:each="schedule: ${schedules}">
+<th:block th:each="schedule, iStat: ${schedules}">
     <tr>
         <div>
             <td th:text="${schedule.startTime}" />

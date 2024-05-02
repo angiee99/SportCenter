@@ -1,5 +1,6 @@
 package com.sportcenterplatform.exceptions;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -49,12 +50,12 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(HttpClientErrorException.NotFound.class)
-    public ResponseEntity<String> handleNotFoundException(BadCredentialsException ex) {
+    public ResponseEntity<String> handleNotFoundException(ChangeSetPersister.NotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleException(BadCredentialsException ex) {
+    public ResponseEntity<String> handleException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
 }
