@@ -2,6 +2,7 @@ package com.sportcenterplatform.service.impl;
 
 import com.sportcenterplatform.dto.ScheduleInfoDTO;
 import com.sportcenterplatform.entity.Schedule;
+import com.sportcenterplatform.entity.SportsEvent;
 import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleInfoDTO> getAllBySportsEventId(Long id) {
-        List<Schedule> schedules = scheduleRepository.findAll();
+    public List<ScheduleInfoDTO> getAllBySportsEventId(SportsEvent event) {
+        List<Schedule> schedules = scheduleRepository.getSchedulesBySportsEvent(event);
         List<ScheduleInfoDTO> result = schedules.stream()
                 .map(this::convertToDTO).toList();
         return result;

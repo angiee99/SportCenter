@@ -32,6 +32,11 @@ public class SportsEventServiceImpl implements SportsEventService {
         return convertToDTO(sportsEvent);
     }
 
+    @Override
+    public SportsEvent getSportsEventEntityById(Long id) {
+        return sportsEventRepository.findById(id).orElse(null);
+    }
+
     private SportsEventInfoDTO convertToDTO(SportsEvent event){
         return new SportsEventInfoDTO(
                 event.getId(),

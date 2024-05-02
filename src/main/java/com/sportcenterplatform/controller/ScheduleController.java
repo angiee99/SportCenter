@@ -1,5 +1,6 @@
 package com.sportcenterplatform.controller;
 
+import com.sportcenterplatform.entity.SportsEvent;
 import com.sportcenterplatform.service.ScheduleService;
 import com.sportcenterplatform.service.SportsEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class ScheduleController {
     public String showAllBySportsEventId(@RequestParam(value = "id") Long id, Model model){
         System.out.println(id);
         model.addAttribute("event", sportsEventService.getSportsEventById(id));
-        model.addAttribute("schedules", scheduleService.getAllBySportsEventId(id));
+        model.addAttribute("schedules", scheduleService.getAllBySportsEventId(
+                sportsEventService.getSportsEventEntityById(id)));
         return "schedules";
     }
 }
