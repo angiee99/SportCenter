@@ -5,6 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -60,8 +61,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
      * @return the JWT token extracted from the request header, or null if not found
      */
     private String extractToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+        if(request.getSession().getAttribute("token") == null){
+            return null;
+        }
+        String bearerToken = request.getSession().getAttribute("token").toString();
+        if (bearerToken != null) {
+            return bearerToken;
+        }
+        if (bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;

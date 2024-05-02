@@ -3,6 +3,7 @@ package com.sportcenterplatform.controller;
 import com.sportcenterplatform.config.UserAuthenticationProvider;
 import com.sportcenterplatform.dto.*;
 import com.sportcenterplatform.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,12 +34,12 @@ public class AuthController {
      * @return redirects to /events
      */
     @PostMapping("/login")
-    public String login(@ModelAttribute UserLoginModel user, Model model) {
+    public String login(@ModelAttribute UserLoginModel user, HttpSession session) {
         UserDTO authenticatedUser = userService.login(
                 user.getEmail(),
                 user.getPassword());
         String token = userAuthenticationProvider.createToken(authenticatedUser);
-        tokenStorage.setToken(token);
+        session.setAttribute("token", token);
         return "redirect:/events";
     }
     @GetMapping("/login")
