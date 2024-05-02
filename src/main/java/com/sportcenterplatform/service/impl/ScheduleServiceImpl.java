@@ -25,6 +25,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         return result;
     }
 
+    public boolean isAvailable(Long scheduleId){
+        if(!scheduleRepository.existsById(scheduleId))
+            throw new IllegalArgumentException("Schedule with id "+ scheduleId +" was not found");
+
+        Schedule schedule = scheduleRepository.findById(scheduleId).get();
+        return schedule.getSignedUpCount() < schedule.getCapacity();
+    }
     private ScheduleInfoDTO convertToDTO(Schedule schedule){
         ScheduleInfoDTO result = new ScheduleInfoDTO(
                 schedule.getId(),
