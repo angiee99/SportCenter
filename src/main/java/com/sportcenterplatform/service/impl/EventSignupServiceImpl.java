@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class EventSignupServiceImpl implements EventSignupService {
@@ -53,6 +54,12 @@ public class EventSignupServiceImpl implements EventSignupService {
         Schedule schedule = scheduleRepository.findById(scheduleId).get();
         schedule.setSignedUpCount(schedule.getSignedUpCount() + 1);
         scheduleRepository.save(schedule);
+    }
+
+    public List<EventSignup> getByUserId(Long userId){
+        if(userRepository.findUserById(userId).isEmpty())
+            throw new IllegalArgumentException("User with id "+ userId +" was not found");
+        return eventSignupRepository.getEventSignupsByUser(userRepository.findUserById(userId).get());
     }
 
 }

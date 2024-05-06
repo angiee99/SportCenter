@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My events</title>
+</head>
+<body>
+<h1>My signed ups</h1>
+<th:block th:each="schedule, iStat: ${schedules}">
+    <tr>
+        <div>
+            <td th:text="${schedule.startTime}" />
+            <td th:text="${schedule.endTime}" />
+            <td th:text="${schedule.signedUpCount}" />
+            <td th:text="' / '+${schedule.capacity}" />
+        </div>
+
+        <form action="#" th:action="@{/unsignup}" method="post">
+            <input type="hidden" th:value="${schedule.id}" th:name="id"/>
+            <p><input type="submit" value="Cancel sign up" /></p>
+        </form>
+    </tr>
+</th:block>
+</body>
+</html>

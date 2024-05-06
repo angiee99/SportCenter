@@ -32,6 +32,13 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule schedule = scheduleRepository.findById(scheduleId).get();
         return schedule.getSignedUpCount() < schedule.getCapacity();
     }
+
+    @Override
+    public List<ScheduleInfoDTO> getAllByIds(List<Long> ids) {
+        return scheduleRepository.findAllById(ids).stream()
+                .map(this::convertToDTO).toList();
+    }
+
     private ScheduleInfoDTO convertToDTO(Schedule schedule){
         ScheduleInfoDTO result = new ScheduleInfoDTO(
                 schedule.getId(),
