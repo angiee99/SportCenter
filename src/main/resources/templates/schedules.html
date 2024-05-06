@@ -29,11 +29,13 @@
 
         <form action="#" th:action="@{/signup}" method="post">
             <input type="hidden" th:value="${schedule.id}" th:name="id"/>
+            <input type="hidden" th:value="${event.id}" th:name="eventId"/>
             <p><input type="submit" value="Sign up" /></p>
         </form>
     </tr>
 </th:block>
 
+<p th:text="${message}"></p>
 
 
 </body>

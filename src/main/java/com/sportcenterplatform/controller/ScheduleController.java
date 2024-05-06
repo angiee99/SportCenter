@@ -1,6 +1,5 @@
 package com.sportcenterplatform.controller;
 
-import com.sportcenterplatform.entity.SportsEvent;
 import com.sportcenterplatform.service.ScheduleService;
 import com.sportcenterplatform.service.SportsEventService;
 import org.springframework.beans.factory.annotation.Autowired;
