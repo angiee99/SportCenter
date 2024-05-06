@@ -27,14 +27,15 @@ public class EventSignupController {
     public String signup(@AuthenticationPrincipal UserDetails userDetails,
                          @RequestParam(value = "id") Long scheduleId){
         Long userId = ((User) userDetails).getId();
-        System.out.println("Signup on schedule with id: " + scheduleId);
-        System.out.println("User Id: " +userId);
 
-        if(scheduleService.isAvailable(scheduleId)){
-            eventSignupService.signup(userId, scheduleId);
+        if(!scheduleService.isAvailable(scheduleId)){
+            System.out.println("Capacity is full"); // todo: add this to GUI
+        }
+        else if(eventSignupService.isSignedUp(userId, scheduleId)){
+            System.out.println("This user is already signed up for the event"); // todo: add this to GUI
         }
         else{
-            System.out.println("Capacity is full");
+            eventSignupService.signup(userId, scheduleId);
         }
 
         return "test";

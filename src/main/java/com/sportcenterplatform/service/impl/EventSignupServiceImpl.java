@@ -30,14 +30,23 @@ public class EventSignupServiceImpl implements EventSignupService {
         if(!scheduleRepository.existsById(scheduleId))
             throw new IllegalArgumentException("Schedule with id "+ scheduleId +" was not found");
 
-        // TODO control if not signed up already
-
         EventSignup signup = new EventSignup(LocalDateTime.now(),
                 userRepository.findById(userId).get(), scheduleRepository.findById(scheduleId).get());
 
         eventSignupRepository.save(signup);
 
         increaseSignUpCount(scheduleId);
+    }
+
+    @Override
+    public boolean isSignedUp(Long userId, Long scheduleId) {
+        if(userRepository.findUserById(userId).isEmpty())
+            throw new IllegalArgumentException("User with id "+ userId +" was not found");
+        if(scheduleRepository.findById(scheduleId).isEmpty())
+            throw new IllegalArgumentException("Schedule with id "+ scheduleId +" was not found");
+
+        return eventSignupRepository.existsByUserAndSchedule(userRepository.findUserById(userId).get(),
+                scheduleRepository.findById(scheduleId).get());
     }
 
     private void increaseSignUpCount(Long scheduleId){
