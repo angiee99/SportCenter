@@ -20,7 +20,7 @@
                 <li>
                     <a href="#" th:href="@{/events}">Home</a>
                 </li>
-                <li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
                     <a href="#" th:href="@{/signup}">My SignUps</a>
                 </li>
             </ul>

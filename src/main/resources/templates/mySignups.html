@@ -5,6 +5,9 @@
     <title>My events</title>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}">
+</div>
+
 <h1>My signed ups</h1>
 <th:block th:each="schedule, iStat: ${schedules}">
     <tr>
