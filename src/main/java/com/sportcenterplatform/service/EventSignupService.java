@@ -10,4 +10,6 @@ public interface EventSignupService {
     boolean isSignedUp(Long userId, Long scheduleId);
     List<EventSignup> getByUserId(Long userId);
     List<ScheduleInfoDTO> getSchedulesByUserId(Long userId);
+
+    void removeSignup(Long userId, Long scheduleId);
 }

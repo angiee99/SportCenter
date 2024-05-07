@@ -15,7 +15,7 @@
             <td th:text="' / '+${schedule.capacity}" />
         </div>
 
-        <form action="#" th:action="@{/unsignup}" method="post">
+        <form action="#" th:action="@{/signup/delete}" method="post">
             <input type="hidden" th:value="${schedule.id}" th:name="id"/>
             <p><input type="submit" value="Cancel sign up" /></p>
         </form>

@@ -1,7 +1,6 @@
 package com.sportcenterplatform.controller;
 
 import com.sportcenterplatform.dto.ScheduleInfoDTO;
-import com.sportcenterplatform.entity.EventSignup;
 import com.sportcenterplatform.service.EventSignupService;
 import com.sportcenterplatform.service.ScheduleService;
 import com.sportcenterplatform.service.SportsEventService;
@@ -56,21 +55,16 @@ public class EventSignupController {
     public String getAll(@AuthenticationPrincipal UserDetails userDetails,
                          Model model){
         Long userId = ((User) userDetails).getId();
-        // todo: change this
         List<ScheduleInfoDTO> schedules =eventSignupService.getSchedulesByUserId(userId);
         model.addAttribute("schedules", schedules);
         return "mySignups";
     }
-    @DeleteMapping()
+    @PostMapping("/delete")
     public String deleteSignup(@AuthenticationPrincipal UserDetails userDetails,
-                               @RequestParam(value = "id") Long scheduleId,
-                               Model model){
+                               @RequestParam(value = "id") Long scheduleId){
         Long userId = ((User) userDetails).getId();
-        String message;
-//        eventSignupService.removeSignup(userId, scheduleId);
-        List<ScheduleInfoDTO> schedules =eventSignupService.getSchedulesByUserId(userId);
-        model.addAttribute("schedules", schedules);
-        return "mySignups";
+        eventSignupService.removeSignup(userId, scheduleId);
+        return "redirect:/signup";
     }
 
 }

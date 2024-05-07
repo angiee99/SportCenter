@@ -7,6 +7,7 @@ import com.sportcenterplatform.repository.EventSignupRepository;
 import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.repository.UserRepository;
 import com.sportcenterplatform.service.EventSignupService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,6 +69,25 @@ public class EventSignupServiceImpl implements EventSignupService {
         List<EventSignup> signups = getByUserId(userId);
         return signups.stream()
                 .map(e -> convertToDTO(e.getSchedule())).toList();
+    }
+
+    @Override
+    @Transactional
+    public void removeSignup(Long userId, Long scheduleId) {
+        if(!isSignedUp(userId, scheduleId))
+            throw new IllegalArgumentException("User with id "+ userId+" is not" +
+                    "signup up for schedule with id " + scheduleId);
+        eventSignupRepository.deleteEventSignupByUserAndSchedule(
+                userRepository.findUserById(userId).get(),
+                scheduleRepository.findById(scheduleId).get());
+
+        decreaseSignUpCount(scheduleId);
+    }
+
+    private void decreaseSignUpCount(Long scheduleId){
+        Schedule schedule = scheduleRepository.findById(scheduleId).get();
+        schedule.setSignedUpCount(schedule.getSignedUpCount() - 1);
+        scheduleRepository.save(schedule);
     }
 
     private ScheduleInfoDTO convertToDTO(Schedule schedule){
