@@ -10,10 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.sportcenterplatform.entity.User;
 
 import java.util.List;
@@ -46,8 +43,8 @@ public class EventSignupController {
             message = "You are already signed up for this schedule";
         }
         else{
-            message = "Successfully signed up!";
             eventSignupService.signup(userId, scheduleId);
+            message = "Successfully signed up!";
         }
         model.addAttribute("message", message);
         model.addAttribute("event", sportsEventService.getSportsEventById(eventId));
@@ -59,13 +56,21 @@ public class EventSignupController {
     public String getAll(@AuthenticationPrincipal UserDetails userDetails,
                          Model model){
         Long userId = ((User) userDetails).getId();
-        List<EventSignup> signups = eventSignupService.getByUserId(userId);
-
         // todo: change this
-        List<ScheduleInfoDTO> schedules = scheduleService.getAllByIds(signups.stream()
-                .map(e -> e.getSchedule().getId()).toList());
-
+        List<ScheduleInfoDTO> schedules =eventSignupService.getSchedulesByUserId(userId);
         model.addAttribute("schedules", schedules);
         return "mySignups";
     }
+    @DeleteMapping()
+    public String deleteSignup(@AuthenticationPrincipal UserDetails userDetails,
+                               @RequestParam(value = "id") Long scheduleId,
+                               Model model){
+        Long userId = ((User) userDetails).getId();
+        String message;
+//        eventSignupService.removeSignup(userId, scheduleId);
+        List<ScheduleInfoDTO> schedules =eventSignupService.getSchedulesByUserId(userId);
+        model.addAttribute("schedules", schedules);
+        return "mySignups";
+    }
+
 }

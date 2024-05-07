@@ -1,5 +1,6 @@
 package com.sportcenterplatform.service.impl;
 
+import com.sportcenterplatform.dto.ScheduleInfoDTO;
 import com.sportcenterplatform.entity.EventSignup;
 import com.sportcenterplatform.entity.Schedule;
 import com.sportcenterplatform.repository.EventSignupRepository;
@@ -60,6 +61,24 @@ public class EventSignupServiceImpl implements EventSignupService {
         if(userRepository.findUserById(userId).isEmpty())
             throw new IllegalArgumentException("User with id "+ userId +" was not found");
         return eventSignupRepository.getEventSignupsByUser(userRepository.findUserById(userId).get());
+    }
+
+    @Override
+    public List<ScheduleInfoDTO> getSchedulesByUserId(Long userId) {
+        List<EventSignup> signups = getByUserId(userId);
+        return signups.stream()
+                .map(e -> convertToDTO(e.getSchedule())).toList();
+    }
+
+    private ScheduleInfoDTO convertToDTO(Schedule schedule){
+        ScheduleInfoDTO result = new ScheduleInfoDTO(
+                schedule.getId(),
+                schedule.getStartTime(),
+                schedule.getEndTime(),
+                schedule.getSignedUpCount(),
+                schedule.getCapacity()
+        );
+        return result;
     }
 
 }

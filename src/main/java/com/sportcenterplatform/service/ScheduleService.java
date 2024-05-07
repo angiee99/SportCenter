@@ -8,6 +8,5 @@ import java.util.List;
 public interface ScheduleService {
     List<ScheduleInfoDTO> getAllBySportsEventId(SportsEvent event);
     boolean isAvailable(Long scheduleId);
-    List<ScheduleInfoDTO> getAllByIds(List<Long> ids);
 
 }
