@@ -6,7 +6,6 @@ import com.sportcenterplatform.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserService userService;
     private final UserAuthenticationProvider userAuthenticationProvider;
-    private final TokenStorage tokenStorage;
 
     @Autowired
-    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider, TokenStorage tokenStorage) {
+    public AuthController(UserService userService, UserAuthenticationProvider userAuthenticationProvider) {
         this.userService = userService;
         this.userAuthenticationProvider = userAuthenticationProvider;
-        this.tokenStorage = tokenStorage;
     }
 
     /**
