@@ -12,18 +12,13 @@
     <title>My events</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}">
-</div>
+
+<div th:replace="~{fragments/header :: header}"></div>
 
 <h1>My signed ups</h1>
 <th:block th:each="schedule, iStat: ${schedules}">
     <tr>
-        <div>
-            <td th:text="${schedule.startTime}" />
-            <td th:text="${schedule.endTime}" />
-            <td th:text="${schedule.signedUpCount}" />
-            <td th:text="' / '+${schedule.capacity}" />
-        </div>
+        <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
 
         <form action="#" th:action="@{/signup/delete}" method="post">
             <input type="hidden" th:value="${schedule.id}" th:name="id"/>
