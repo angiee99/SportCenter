@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>-</title>
@@ -12,13 +12,17 @@
                 <a class="navbar-brand" href="#">WebSiteName</a>
             </div>
             <ul class="nav">
-                <li class="nav-item"><a href="#" th:href="@{/events}">Home</a>
+                <li class="nav-item mr-2"><a href="#" th:href="@{/events}">Home</a>
                 </li>
-                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                <li class="nav-item mr-2" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a href="#" th:href="@{/signup}">My SignUps</a>
                 </li>
             </ul>
             <ul class="nav navbar-right">
+                <li class="nav-item mr-2" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <span sec:authorize="hasAuthority('ROLE_USER')" > USER </span>
+                    <span sec:authorize="hasAuthority('ROLE_ADMIN')" > ADMIN </span>
+                </li>
                 <li class="nav-item mr-2" th:if="${#authorization.expression('!isAuthenticated()')}">
                     <a href="#" th:href="@{/login}">Login</a>
                 </li>

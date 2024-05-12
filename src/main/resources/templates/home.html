@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -15,6 +16,10 @@
     <div th:replace="~{fragments/header :: header}"></div>
     <div class="container">
         <h1>Home</h1>
+        <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
+            <a href="#" th:href="@{/events/new}">Create new event</a>
+        </div>
+
         <th:block th:each="event: ${events}">
         <tr>
             <th:block>
