@@ -1,5 +1,6 @@
 package com.sportcenterplatform.service;
 
+import com.sportcenterplatform.dto.SportEventNewDTO;
 import com.sportcenterplatform.dto.SportsEventInfoDTO;
 import com.sportcenterplatform.entity.SportsEvent;
 
@@ -10,4 +11,6 @@ public interface SportsEventService {
 
     SportsEventInfoDTO getSportsEventById(Long id);
     SportsEvent getSportsEventEntityById(Long id);
+
+    void save(SportEventNewDTO event);
 }

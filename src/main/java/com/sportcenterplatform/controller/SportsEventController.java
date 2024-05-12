@@ -43,9 +43,8 @@ public class SportsEventController {
     @PostMapping()
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(@ModelAttribute SportEventNewDTO event){
-        System.out.println(event.sportType());
+        sportsEventService.save(event);
         return "redirect:/events";
     }
-
 
 }
