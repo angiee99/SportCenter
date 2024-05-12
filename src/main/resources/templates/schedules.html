@@ -12,36 +12,34 @@
     <title>Schedules</title>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}">
-</div>
-
-<h1>Schedules</h1>
-<th:block>
-<tr>
-    <h2>Selected event</h2>
+<div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1>Schedules</h1>
     <th:block>
-        <td th:text="${event.sportType}" />
-        <td th:text="${event.description}" />
-        <td th:text="'Trainer: '+ ${event.trainerName}" />
-        <td th:text="'email: '+ ${event.trainerEmail}" />
-    </th:block>
-</tr>
-</th:block>
-
-<th:block th:each="schedule, iStat: ${schedules}">
     <tr>
-        <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
-
-        <form action="#" th:action="@{/signup}" method="post">
-            <input type="hidden" th:value="${schedule.id}" th:name="id"/>
-            <input type="hidden" th:value="${event.id}" th:name="eventId"/>
-            <p><input type="submit" value="Sign up" /></p>
-        </form>
+        <h2>Selected event</h2>
+        <th:block>
+            <td th:text="${event.sportType}" />
+            <td th:text="${event.description}" />
+            <td th:text="'Trainer: '+ ${event.trainerName}" />
+            <td th:text="'email: '+ ${event.trainerEmail}" />
+        </th:block>
     </tr>
-</th:block>
+    </th:block>
 
-<p th:text="${message}"></p>
+    <th:block th:each="schedule, iStat: ${schedules}">
+        <tr>
+            <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
 
+            <form action="#" th:action="@{/signup}" method="post">
+                <input type="hidden" th:value="${schedule.id}" th:name="id"/>
+                <input type="hidden" th:value="${event.id}" th:name="eventId"/>
+                <p><input type="submit" value="Sign up" /></p>
+            </form>
+        </tr>
+    </th:block>
 
+    <p th:text="${message}"></p>
+</div>
 </body>
 </html>

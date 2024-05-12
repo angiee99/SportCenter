@@ -14,17 +14,18 @@
 <body>
 
 <div th:replace="~{fragments/header :: header}"></div>
+<div class="container">
+    <h1>My signed ups</h1>
+    <th:block th:each="schedule, iStat: ${schedules}">
+        <tr>
+            <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
 
-<h1>My signed ups</h1>
-<th:block th:each="schedule, iStat: ${schedules}">
-    <tr>
-        <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
-
-        <form action="#" th:action="@{/signup/delete}" method="post">
-            <input type="hidden" th:value="${schedule.id}" th:name="id"/>
-            <p><input type="submit" value="Cancel sign up" /></p>
-        </form>
-    </tr>
-</th:block>
+            <form action="#" th:action="@{/signup/delete}" method="post">
+                <input type="hidden" th:value="${schedule.id}" th:name="id"/>
+                <p><input type="submit" value="Cancel sign up" /></p>
+            </form>
+        </tr>
+    </th:block>
+</div>
 </body>
 </html>
