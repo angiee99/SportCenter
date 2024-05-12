@@ -6,5 +6,23 @@
 </head>
 <body>
 <h1>Create New Event</h1>
+
+<form action="#" th:action="@{/events}" th:object="${event}" method="post">
+    <label for="sportType">Sport Type:</label>
+    <select id="sportType" th:field="*{sportType}">
+        <option th:each="sportType: ${sportTypes}" th:value="${sportType}" th:text="${sportType}"></option>
+    </select>
+
+    <label for="description">Description:</label>
+    <textarea id="description" th:field="*{description}"></textarea>
+
+    <label for="trainer">Trainer:</label>
+    <select id="trainer" th:field="*{trainerId}">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+
 </body>
 </html>

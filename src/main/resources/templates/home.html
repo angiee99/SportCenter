@@ -28,12 +28,12 @@
                 <td th:text="'Trainer: '+ ${event.trainerName}" />
                 <td th:text="'email: '+ ${event.trainerEmail}" />
             </th:block>
-
-            <form action="#" th:action="@{/schedules}" method="get">
-                <input type="hidden" th:value="${event.id}" th:name="id"/>
-                <p><input type="submit" value="Schedules" /></p>
-            </form>
         </tr>
+        <form action="#" th:action="@{/schedules}" method="get">
+            <input type="hidden" th:value="${event.id}" th:name="id"/>
+            <p><input type="submit" value="Schedules" /></p>
+        </form>
+
         </th:block>
     </div>
 </body>
