@@ -11,10 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/events")
@@ -44,6 +41,12 @@ public class SportsEventController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(@ModelAttribute SportEventNewDTO event){
         sportsEventService.save(event);
+        return "redirect:/events";
+    }
+    @PostMapping("/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String delete(@RequestParam(value = "id") Long id){
+//        sportsEventService.delete(id);
         return "redirect:/events";
     }
 

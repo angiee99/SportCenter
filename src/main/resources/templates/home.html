@@ -34,6 +34,13 @@
             <p><input type="submit" value="Schedules" /></p>
         </form>
 
+        <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
+            <form action="#" th:action="@{/events/delete}" method="post">
+                <input type="hidden" th:value="${event.id}" th:name="id"/>
+                <p><input type="submit" value="Delete event and all its schedules" /></p>
+            </form>
+        </div>
+
         </th:block>
     </div>
 </body>
