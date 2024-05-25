@@ -54,7 +54,7 @@ public class ScheduleController {
     public String delete(@RequestParam(value = "id") Long id,
                          @RequestParam(value = "eventId") Long eventId){
 
-//        scheduleService.delete(id);
+        scheduleService.delete(id);
         return "redirect:/schedules?id="+ eventId;
     }
 }

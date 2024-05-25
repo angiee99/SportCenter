@@ -4,9 +4,11 @@ import com.sportcenterplatform.dto.ScheduleInfoDTO;
 import com.sportcenterplatform.dto.ScheduleNewDTO;
 import com.sportcenterplatform.entity.Schedule;
 import com.sportcenterplatform.entity.SportsEvent;
+import com.sportcenterplatform.repository.EventSignupRepository;
 import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.repository.SportsEventRepository;
 import com.sportcenterplatform.service.ScheduleService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,12 @@ import java.util.List;
 public class ScheduleServiceImpl implements ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final SportsEventRepository sportsEventRepository;
+    private final EventSignupRepository eventSignupRepository;
     @Autowired
-    public ScheduleServiceImpl(ScheduleRepository scheduleRepository, SportsEventRepository sportsEventRepository) {
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository, SportsEventRepository sportsEventRepository, EventSignupRepository eventSignupRepository) {
         this.scheduleRepository = scheduleRepository;
         this.sportsEventRepository = sportsEventRepository;
+        this.eventSignupRepository = eventSignupRepository;
     }
 
     @Override
@@ -50,6 +54,15 @@ public class ScheduleServiceImpl implements ScheduleService {
         result.setSignedUpCount(0);
 
         scheduleRepository.save(result);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        if(scheduleRepository.findById(id).isEmpty())
+            throw new IllegalArgumentException("Schedule with id "+ id +" was not found");
+        eventSignupRepository.deleteEventSignupBySchedule(scheduleRepository.findById(id).get());
+        scheduleRepository.deleteById(id);
     }
 
     private ScheduleInfoDTO convertToDTO(Schedule schedule){

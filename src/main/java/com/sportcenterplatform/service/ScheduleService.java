@@ -11,4 +11,6 @@ public interface ScheduleService {
     boolean isAvailable(Long scheduleId);
 
     void save(ScheduleNewDTO schedule, Long eventId);
+
+    void delete(Long id);
 }
