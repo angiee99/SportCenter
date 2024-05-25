@@ -12,4 +12,5 @@ public interface EventSignupRepository extends JpaRepository<EventSignup, Long> 
 
     List<EventSignup> getEventSignupsByUser(User user);
     void deleteEventSignupByUserAndSchedule(User user, Schedule schedule);
+    void deleteEventSignupBySchedule(Schedule schedule);
 }
