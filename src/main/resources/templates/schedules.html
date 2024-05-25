@@ -44,6 +44,14 @@
             <input type="hidden" th:value="${event.id}" th:name="eventId"/>
             <p><input type="submit" value="Sign up" /></p>
         </form>
+
+        <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
+            <form action="#" th:action="@{/schedules/delete}" method="post">
+                <input type="hidden" th:value="${schedule.id}" th:name="id"/>
+                <input type="hidden" th:value="${event.id}" th:name="eventId"/>
+                <p><input type="submit" value="Delete schedule" /></p>
+            </form>
+        </div>
     </th:block>
 
     <p th:text="${message}"></p>

@@ -48,4 +48,13 @@ public class ScheduleController {
         scheduleService.save(schedule, eventId);
         return "redirect:/schedules?id="+ eventId;
     }
+
+    @PostMapping("/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String delete(@RequestParam(value = "id") Long id,
+                         @RequestParam(value = "eventId") Long eventId){
+
+//        scheduleService.delete(id);
+        return "redirect:/schedules?id="+ eventId;
+    }
 }
