@@ -30,6 +30,11 @@ public class ScheduleController {
         model.addAttribute("event", sportsEventService.getSportsEventById(id));
         model.addAttribute("schedules", scheduleService.getAllBySportsEventId(
                 sportsEventService.getSportsEventEntityById(id)));
+
+        if(scheduleService.getAllBySportsEventId(
+                sportsEventService.getSportsEventEntityById(id)).isEmpty()){
+            model.addAttribute("message", "Selected sports event does not have any schedules yet");
+        }
         return "schedules";
     }
     @GetMapping("/new")
