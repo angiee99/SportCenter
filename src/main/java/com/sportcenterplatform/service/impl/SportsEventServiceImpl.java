@@ -78,6 +78,16 @@ public class SportsEventServiceImpl implements SportsEventService {
         sportsEventRepository.deleteById(id);
     }
 
+    @Override
+    public void updateAvailability(Long id) {
+        if(sportsEventRepository.findById(id).isEmpty())
+            throw new IllegalArgumentException("Sports event with id "+ id +" was not found");
+        SportsEvent event = sportsEventRepository.findById(id).get();
+        event.setIsAvailable(!event.getIsAvailable());
+
+        sportsEventRepository.save(event);
+    }
+
     private SportsEventInfoDTO convertToDTO(SportsEvent event){
         return new SportsEventInfoDTO(
                 event.getId(),

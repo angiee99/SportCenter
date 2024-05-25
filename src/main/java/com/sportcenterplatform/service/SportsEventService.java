@@ -15,4 +15,6 @@ public interface SportsEventService {
     void save(SportEventNewDTO event);
 
     void delete(Long id);
+
+    void updateAvailability(Long id);
 }

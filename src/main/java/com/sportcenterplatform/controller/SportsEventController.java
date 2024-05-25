@@ -47,5 +47,11 @@ public class SportsEventController {
         sportsEventService.delete(id);
         return "redirect:/events";
     }
+    @PostMapping("/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String updateAvailability(@RequestParam(value = "id") Long id){
+        sportsEventService.updateAvailability(id);
+        return "redirect:/events";
+    }
 
 }
