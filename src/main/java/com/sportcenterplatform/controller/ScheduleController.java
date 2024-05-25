@@ -44,7 +44,7 @@ public class ScheduleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(@RequestParam(value = "eventId") Long eventId,
                        @ModelAttribute ScheduleNewDTO schedule){
-        System.out.println(eventId);
+//        scheduleService.save(schedule);
         return "redirect:/schedules?id="+ eventId;
     }
 }
