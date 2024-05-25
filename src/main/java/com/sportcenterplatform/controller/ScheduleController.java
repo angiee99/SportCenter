@@ -1,8 +1,6 @@
 package com.sportcenterplatform.controller;
 
 import com.sportcenterplatform.dto.ScheduleNewDTO;
-import com.sportcenterplatform.dto.SportEventNewDTO;
-import com.sportcenterplatform.entity.SportType;
 import com.sportcenterplatform.service.ScheduleService;
 import com.sportcenterplatform.service.SportsEventService;
 import org.springframework.beans.factory.annotation.Autowired;
