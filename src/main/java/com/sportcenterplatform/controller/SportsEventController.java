@@ -4,6 +4,7 @@ package com.sportcenterplatform.controller;
 import com.sportcenterplatform.dto.SportEventNewDTO;
 import com.sportcenterplatform.entity.SportType;
 import com.sportcenterplatform.entity.SportsEvent;
+import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.service.SportsEventService;
 import com.sportcenterplatform.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class SportsEventController {
     @PostMapping("/delete")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String delete(@RequestParam(value = "id") Long id){
-//        sportsEventService.delete(id);
+        sportsEventService.delete(id);
         return "redirect:/events";
     }
 

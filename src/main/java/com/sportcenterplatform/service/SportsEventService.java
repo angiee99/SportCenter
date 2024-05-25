@@ -13,4 +13,6 @@ public interface SportsEventService {
     SportsEvent getSportsEventEntityById(Long id);
 
     void save(SportEventNewDTO event);
+
+    void delete(Long id);
 }
