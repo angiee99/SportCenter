@@ -36,7 +36,7 @@ public class ScheduleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showNewForm(@RequestParam(value = "eventId") Long eventId, Model model){
         model.addAttribute("event", sportsEventService.getSportsEventById(eventId));
-        model.addAttribute("schedule", new ScheduleNewDTO(LocalDateTime.now(), LocalDateTime.now(), 10, 0L));
+        model.addAttribute("schedule", new ScheduleNewDTO(LocalDateTime.now(), LocalDateTime.now(), 10));
 
         return "newScheduleForm";
     }
@@ -44,7 +44,8 @@ public class ScheduleController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(@RequestParam(value = "eventId") Long eventId,
                        @ModelAttribute ScheduleNewDTO schedule){
-//        scheduleService.save(schedule);
+
+        scheduleService.save(schedule, eventId);
         return "redirect:/schedules?id="+ eventId;
     }
 }
