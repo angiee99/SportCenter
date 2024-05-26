@@ -1,14 +1,15 @@
 package com.sportcenterplatform;
 
 import com.sportcenterplatform.dto.UserRegisterDTO;
-import com.sportcenterplatform.entity.*;
+import com.sportcenterplatform.entity.Schedule;
+import com.sportcenterplatform.entity.SportType;
+import com.sportcenterplatform.entity.SportsEvent;
 import com.sportcenterplatform.repository.ScheduleRepository;
 import com.sportcenterplatform.repository.SportsEventRepository;
 import com.sportcenterplatform.repository.UserRepository;
 import com.sportcenterplatform.service.EventSignupService;
 import com.sportcenterplatform.service.UserService;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
