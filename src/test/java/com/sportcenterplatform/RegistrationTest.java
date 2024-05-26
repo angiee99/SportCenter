@@ -1,10 +1,18 @@
 package com.sportcenterplatform;
 
+import com.sportcenterplatform.dto.UserDTO;
+import com.sportcenterplatform.dto.UserRegisterDTO;
 import com.sportcenterplatform.service.UserService;
+import jakarta.transaction.Transactional;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class RegistrationTest {
@@ -15,7 +23,19 @@ public class RegistrationTest {
     }
 
     @Test
+    @Transactional
     public void test(){
-        System.out.println(userService.getAllUsers().size());
+
+        UserRegisterDTO user = new UserRegisterDTO("email@domain.com", "coolusername",
+                "passWordQ1235");
+        Long id = userService.register(user);
+
+        UserDTO checkUser = userService.getUsersById(List.of(id)).get(0);
+        assertEquals(checkUser.username(), user.username());
+
+        // test the duplicate username
+        UserRegisterDTO user2 = new UserRegisterDTO("email2@domain.com", "coolusername",
+                "passWordQ1235");
+        assertThrows(Exception.class,()-> userService.register(user2));
     }
 }
