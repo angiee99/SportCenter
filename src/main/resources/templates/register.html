@@ -13,17 +13,30 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div class="container">
-    <h1>Login page</h1>
+<div class="container d-flex flex-column align-items-center">
+    <div class="py-2">
+        <h1>Registration</h1>
+    </div>
 
-    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
-        <p>Email: <input type="text" th:field="*{email}" /></p>
-        <p>Username: <input type="text" th:field="*{username}" /></p>
-        <p>Password: <input type="text" th:field="*{password}" /></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-        <a href="/login" th:href="@{/login}">
-            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Log in
-        </a>
+    <form class="p-2" action="#" th:action="@{/register}" th:object="${user}" method="post">
+        <p>Email:
+            <input class="rounded  border border-secondary px-5 py-1 d-block"
+                   type="text" th:field="*{email}" /></p>
+        <p>Username:
+            <input class="rounded border border-secondary px-5 py-1 d-block"
+                   type="text" th:field="*{username}" /></p>
+        <p>Password:
+            <input class="rounded border border-secondary px-5 py-1 d-block"
+                   type="text" th:field="*{password}" /></p>
+
+        <p class="d-flex flex-column align-items-center">
+            <input class="d-block px-5 my-2 btn btn-primary" type="submit" value="Submit" />
+            <input class="d-block px-5 my-2 btn btn-primary" type="reset" value="Reset" />
+            <a class="d-block px-5 my-2 " href="/login" th:href="@{/login}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Log in
+            </a>
+        </p>
+
     </form>
 </div>
 </body>
