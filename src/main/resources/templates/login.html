@@ -13,16 +13,30 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div class="container">
-<h1>Login page</h1>
-    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
-        <p>Email: <input type="text" th:field="*{email}" /></p>
-        <p>Password: <input type="text" th:field="*{password}" /></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<div class="container d-flex flex-column align-items-center">
+    <div class="py-2">
+        <h1>Login page</h1>
+    </div>
 
-        <a href="/register" th:href="@{/register}">
-            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Register
-        </a>
+    <form action="#" th:action="@{/login}" th:object="${user}" method="post" style="width: 300px;">
+        <p class="d-flex flex-column">Email:
+            <input type="text" th:field="*{email}" class="rounded border border-secondary p-1"/>
+        </p>
+        <p class="d-flex flex-column">Password:
+            <input type="text" th:field="*{password}" class="rounded border border-secondary p-1"/>
+        </p>
+
+        <p class="d-flex flex-column align-items-center">
+            <input class="d-block px-5 my-2 btn btn-primary"
+                   type="submit" value="Submit" />
+            <input class="d-block px-5 my-2 btn btn-secondary"
+                   type="reset" value="Reset" />
+
+            <a href="/register" th:href="@{/register}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Register
+            </a>
+        </p>
+
     </form>
 </div>
 </body>
