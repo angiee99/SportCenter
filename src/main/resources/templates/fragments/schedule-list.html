@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="schedule-list">
-    <td th:text="${schedule.startTime}" />
-    <td th:text="${schedule.endTime}" />
-    <td th:text="${schedule.signedUpCount}" />
-    <td th:text="' / '+${schedule.capacity}" />
+<div th:fragment="schedule-list" class="py-2">
+    <table>
+        <tr class="d-flex flex-column">
+            <td th:text="${schedule.startTime}" />
+            <td th:text="${schedule.endTime}" />
+            <td th:text="${schedule.signedUpCount}+' / '+${schedule.capacity}" />
+        </tr>
+    </table>
 </div>
 </body>
 </html>
