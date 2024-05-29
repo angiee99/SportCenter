@@ -18,16 +18,19 @@
         <h1>Registration</h1>
     </div>
 
-    <form class="p-2" action="#" th:action="@{/register}" th:object="${user}" method="post">
-        <p>Email:
-            <input class="rounded  border border-secondary px-5 py-1 d-block"
-                   type="text" th:field="*{email}" /></p>
-        <p>Username:
-            <input class="rounded border border-secondary px-5 py-1 d-block"
-                   type="text" th:field="*{username}" /></p>
-        <p>Password:
-            <input class="rounded border border-secondary px-5 py-1 d-block"
-                   type="text" th:field="*{password}" /></p>
+    <form action="#" th:action="@{/register}" th:object="${user}" method="post" style="width: 300px;">
+        <p class="d-flex flex-column">Email:
+            <input class="rounded border border-secondary p-1"
+                   type="text" th:field="*{email}" />
+        </p>
+        <p class="d-flex flex-column">Username:
+            <input class="rounded border border-secondary p-1"
+                   type="text" th:field="*{username}" />
+        </p>
+        <p class="d-flex flex-column">Password:
+            <input class="rounded border border-secondary p-1"
+                   type="text" th:field="*{password}" />
+        </p>
 
         <p class="d-flex flex-column align-items-center">
             <input class="d-block px-5 my-2 btn btn-primary" type="submit" value="Submit" />
