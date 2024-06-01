@@ -8,9 +8,9 @@
 <div th:fragment="schedule-list" class="py-2">
     <table>
         <tr class="d-flex flex-column">
-            <td th:text="${schedule.startTime}" />
-            <td th:text="${schedule.endTime}" />
-            <td th:text="${schedule.signedUpCount}+' / '+${schedule.capacity}" />
+            <td th:text="'Starts at: '+${schedule.startTime}" />
+            <td th:text="'Ends at: '+${schedule.endTime}" />
+            <td th:text="'Capacity: '+${schedule.signedUpCount}+' / '+${schedule.capacity}" />
         </tr>
     </table>
 </div>
