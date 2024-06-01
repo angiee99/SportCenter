@@ -1,5 +1,6 @@
 package com.sportcenterplatform.service.impl;
 
+import com.sportcenterplatform.dto.ScheduleAndEventInfoDTO;
 import com.sportcenterplatform.dto.ScheduleInfoDTO;
 import com.sportcenterplatform.entity.EventSignup;
 import com.sportcenterplatform.entity.Schedule;
@@ -65,7 +66,7 @@ public class EventSignupServiceImpl implements EventSignupService {
     }
 
     @Override
-    public List<ScheduleInfoDTO> getSchedulesByUserId(Long userId) {
+    public List<ScheduleAndEventInfoDTO> getSchedulesByUserId(Long userId) {
         List<EventSignup> signups = getByUserId(userId);
         return signups.stream()
                 .map(e -> convertToDTO(e.getSchedule())).toList();
@@ -90,13 +91,16 @@ public class EventSignupServiceImpl implements EventSignupService {
         scheduleRepository.save(schedule);
     }
 
-    private ScheduleInfoDTO convertToDTO(Schedule schedule){
-        ScheduleInfoDTO result = new ScheduleInfoDTO(
+    private ScheduleAndEventInfoDTO convertToDTO(Schedule schedule){
+        ScheduleAndEventInfoDTO result = new ScheduleAndEventInfoDTO(
                 schedule.getId(),
                 schedule.getStartTime(),
                 schedule.getEndTime(),
                 schedule.getSignedUpCount(),
-                schedule.getCapacity()
+                schedule.getCapacity(),
+                schedule.getSportsEvent().getSportType(),
+                schedule.getSportsEvent().getDescription(),
+                schedule.getSportsEvent().getTrainer().getEmail()
         );
         return result;
     }

@@ -1,5 +1,6 @@
 package com.sportcenterplatform.controller;
 
+import com.sportcenterplatform.dto.ScheduleAndEventInfoDTO;
 import com.sportcenterplatform.dto.ScheduleInfoDTO;
 import com.sportcenterplatform.service.EventSignupService;
 import com.sportcenterplatform.service.ScheduleService;
@@ -55,7 +56,7 @@ public class EventSignupController {
     public String getAll(@AuthenticationPrincipal UserDetails userDetails,
                          Model model){
         Long userId = ((User) userDetails).getId();
-        List<ScheduleInfoDTO> schedules =eventSignupService.getSchedulesByUserId(userId);
+        List<ScheduleAndEventInfoDTO> schedules = eventSignupService.getSchedulesByUserId(userId);
         model.addAttribute("schedules", schedules);
         return "mySignups";
     }

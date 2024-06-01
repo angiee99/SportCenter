@@ -15,17 +15,26 @@
 
 <div th:replace="~{fragments/header :: header}"></div>
 <div class="container">
-    <h1>My signed ups</h1>
-    <th:block th:each="schedule, iStat: ${schedules}">
-        <tr>
+    <h1>My signups</h1>
+    <div th:each="schedule: ${schedules}">
+        <div class="my-2 p-3 border rounded">
+            <table>
+                <tr class="d-flex flex-column">
+                    <td th:text="'Sport type: '+${schedule.sportType}"></td>
+                    <td th:text="${schedule.description}"></td>
+                    <td th:text="'Trainer email: '+${schedule.trainerEmail}"></td>
+                </tr>
+            </table>
+
+
             <div th:replace="~{fragments/schedule-list :: schedule-list}"></div>
 
             <form action="#" th:action="@{/signup/delete}" method="post">
                 <input type="hidden" th:value="${schedule.id}" th:name="id"/>
-                <p><input type="submit" value="Cancel sign up" /></p>
+                <p><input type="submit" value="Cancel sign up"  class="btn btn-outline-danger"/></p>
             </form>
-        </tr>
-    </th:block>
+        </div>
+    </div>
 </div>
 </body>
 </html>
