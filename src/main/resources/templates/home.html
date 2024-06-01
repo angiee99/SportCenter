@@ -17,7 +17,7 @@
     <div class="container d-flex flex-column">
         <h1>Home</h1>
         <div class="py-2" sec:authorize="hasAuthority('ROLE_ADMIN')" >
-            <a href="#" th:href="@{/events/new}">Create new event</a>
+            <a href="#" th:href="@{/events/new}" class="btn btn-outline-primary">Create new event</a>
         </div>
 
         <div th:if="${#authorization.expression('!isAuthenticated()')}">
