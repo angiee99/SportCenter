@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 @Builder
 public record ScheduleInfoDTO(
         Long id,
-        LocalDateTime startTime,
-        LocalDateTime endTime,
+        String startTime,
+        String endTime,
         Integer signedUpCount,
         Integer capacity
         ) {

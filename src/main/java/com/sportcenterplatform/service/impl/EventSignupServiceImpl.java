@@ -94,8 +94,8 @@ public class EventSignupServiceImpl implements EventSignupService {
     private ScheduleAndEventInfoDTO convertToDTO(Schedule schedule){
         ScheduleAndEventInfoDTO result = new ScheduleAndEventInfoDTO(
                 schedule.getId(),
-                schedule.getStartTime(),
-                schedule.getEndTime(),
+                schedule.getStartTime().toString().replace('T', ' '),
+                schedule.getEndTime().toString().replace('T', ' '),
                 schedule.getSignedUpCount(),
                 schedule.getCapacity(),
                 schedule.getSportsEvent().getSportType(),

@@ -68,8 +68,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleInfoDTO convertToDTO(Schedule schedule){
         ScheduleInfoDTO result = new ScheduleInfoDTO(
                 schedule.getId(),
-                schedule.getStartTime(),
-                schedule.getEndTime(),
+                schedule.getStartTime().toString().replace('T', ' '),
+                schedule.getEndTime().toString().replace('T', ' '),
                 schedule.getSignedUpCount(),
                 schedule.getCapacity()
         );
