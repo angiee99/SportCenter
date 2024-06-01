@@ -1,28 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
     <title>New Event</title>
 </head>
 <body>
-<h1>Create New Event</h1>
+<div th:replace="~{fragments/header :: header}"></div>
 
-<form action="#" th:action="@{/events}" th:object="${event}" method="post">
-    <label for="sportType">Sport Type:</label>
-    <select id="sportType" th:field="*{sportType}">
-        <option th:each="sportType: ${sportTypes}" th:value="${sportType}" th:text="${sportType}"></option>
-    </select>
+<div class="container d-flex flex-column align-items-center">
+    <h1>Create New Event</h1>
 
-    <label for="description">Description:</label>
-    <textarea id="description" th:field="*{description}"></textarea>
+    <form action="#" th:action="@{/events}" th:object="${event}" method="post" style="width: 400px;">
+        <div class="d-flex flex-column my-3">
+            <label for="sportType">Sport Type:</label>
+            <select id="sportType" th:field="*{sportType}" class="rounded border border-secondary p-1">
+                <option th:each="sportType: ${sportTypes}" th:value="${sportType}" th:text="${sportType}"></option>
+            </select>
+        </div>
 
-    <label for="trainer">Trainer:</label>
-    <select id="trainer" th:field="*{trainerId}">
-        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
-    </select>
+        <div class="d-flex flex-column my-3">
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
 
-    <button type="submit">Submit</button>
-</form>
+        <div class="d-flex flex-column my-3">
+            <label for="trainer">Trainer:</label>
+            <select id="trainer" th:field="*{trainerId}" class="rounded border border-secondary p-1">
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+            </select>
+        </div>
 
+        <div class="d-flex flex-column my-2">
+            <button type="submit" class="my-4 px-5 btn btn-primary align-self-center">Submit</button>
+        </div>
+
+    </form>
+</div>
 </body>
 </html>
