@@ -19,10 +19,13 @@
     <th:block>
         <h3>Selected event</h3>
         <div class="py-2">
-            <p th:text="${event.sportType}" />
-            <p th:text="${event.description}" />
-            <p th:text="'Trainer: '+ ${event.trainerName}" />
-            <p th:text="'email: '+ ${event.trainerEmail}" />
+            <table>
+                <tr class="d-flex flex-column">
+                    <td th:text="'Sport type: '+${event.sportType}"></td>
+                    <td th:text="${event.description}"></td>
+                    <td th:text="'Trainer: '+ ${event.trainerName}+', email: '+${event.trainerEmail}"></td>
+                </tr>
+            </table>
         </div>
 
         <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
